@@ -1,0 +1,148 @@
+﻿client_code,degree,betweenness,Dealer_Name
+co0001,216,6333.45,Other not listed (see event note)
+cp0243,224,2994.0333333333333,"Prévost, ainé"
+cl1538,192,2733,"Barrois, Louis-François, [fils] aîné"
+cp0041,192,2702.8333333333335,Colombier
+cp0136,194,2639.9500000000003,"Guillaume, Charles, fils"
+cp0244,222,2324.0000000000005,"Prévost, Antoine, jeune"
+cl2297,192,1541.8333333333333,"Belin, François"
+cp0112,208,1476.6666666666665,"Froullé, Jacques"
+cl1672,162,1363.1666666666667,"Monory, François Hubert"
+cp0019,194,1114.7833333333333,"Bleuet, Claude, pere"
+cp0265,204,1039.8333333333333,"Saugrain, Claude-Marin, jeune"
+cl2338,196,879.5,"Nyon, Jean-Luc, ainé"
+cp0124,184,783.5000000000001,"Gogué, Jean-Baptiste"
+cp0142,186,722.5,Hardouin
+cl1647,176,496.5,"Le Jay, Edme-Jean (pere)"
+cp0165,172,428,"Knapen, André-François, pere"
+cp0176,176,316,"Le Boucher, Michel"
+cp0082,134,299,Didot
+cp0270,146,290,"Servières, Jean"
+cp0226,92,289.5,"Pichard, Jean-Louis"
+cp0046,40,289,"Crapart, Jean-Baptiste-Nicolas, fils"
+cp0049,34,288,"Cussac, Jean"
+cp0156,174,287.5,"Humblot, Denis"
+cl1572,64,287,"Crapart, Nicolas, pere"
+cl2718,164,148,"Durand, Pierre-Etienne-Germain, (Durand neveu"
+cp0005,142,145.5,"Bailly, Guillaume-Luc"
+cp0261,166,143.33333333333334,"Samson, Jean-Jacques"
+cp0206,170,143,"Méquignon, Claude-Charles, jeune"
+cp0211,178,141.5,"Mérigot, François-Gabriel, pere"
+cp0108,162,120.5,Fournier
+cl1743,156,112,"Vissé, Pierre-Lucien"
+cp0123,106,100,Gobreau
+cp0213,180,71,"Mérigot, Jean-Gabriel, fils jeune"
+cp0154,154,47.333333333333336,"Humaire, Pierre"
+cp0181,148,47,"Le Clerc, Laurent-François"
+cp0225,178,21.166666666666668,"Onfroy, Eugène"
+cp0013,160,20,"Barrois, Pierre-Théophile, jeune"
+cl1633,160,15,"Lamy, Pierre-Michel"
+cp0179,156,9,"Le Clerc, Charles-Guillaume, fils, (ainé ?)"
+cp0207,136,9,"Méquignon, Nicolas-Toussaint, l'aine [aine, p"
+cp0080,122,6.333333333333333,"Dessain, junior"
+cp0129,44,4,"Grangé, veuve"
+cl2946,106,2.5,"Nyon, Pierre-Michel, jeune"
+cp0045,170,2.45,"Couturier, Pierre-Denis, fils"
+cp0020,24,2,"Bleuet, Jean-Antoine, fils"
+cp0204,76,2,Masson
+cp0209,60,2,"Méquignon, veuve de Charles"
+cp0185,138,1.8333333333333333,"Le Gras, Gaspard-Théodore"
+cp0081,158,1,"Dessenne, Victor"
+cp0130,24,1,Grégoire
+cl1598,44,0,Esprit
+cl1616,154,0,"Guillot, Jean-François-Hubert"
+cl1676,62,0,"Moutard, Nicolas-Léger"
+cl2522,64,0,"Laporte, Antoine-Louis-Guillaume-Catherine"
+cp0014,36,0,"Barrois, veuve de Marie-Jacques"
+cp0015,122,0,"Barrois, veuve et fils"
+cp0021,30,0,"Boudet, Antoine-Chrétien"
+cp0024,2,0,"Briasson, Antoine-Claude"
+cp0026,158,0,"Brocas, Paul Denis"
+cp0029,130,0,Brunet
+cp0032,144,0,"Brunet, Thomas"
+cp0035,18,0,"Cellot, Louis"
+cp0040,56,0,"Colas, Jean François"
+cp0043,170,0,Couturier
+cp0047,132,0,Cressend
+cp0065,160,0,"Delalain, Louis-Alexandre, le jeune"
+cp0066,48,0,"Delalain, Nicolas-Augustin, l'aîné"
+cp0070,66,0,"Demonville, Antoine-Guénard"
+cp0077,100,0,"Despilly, Jean-Baptiste, pere"
+cp0084,140,0,"Didot, Pierre-François, jeune"
+cp0103,8,0,Eudes {??]
+cp0110,136,0,"Fournier, Antoine, l'ainé"
+cp0117,54,0,Gautier [?]
+cp0131,40,0,"Gueffier, Pierre-François, fils"
+cp0134,136,0,Guillaume
+cp0135,124,0,"Guillaume, ainé"
+cp0138,30,0,"Guillaume, veuve, neveu"
+cp0150,142,0,Hochereau
+cp0155,158,0,"Humaire, veuve Pierre"
+cp0160,56,0,"Jombert, Louis-Alexandre fils jeune"
+cp0167,64,0,"Lacloye, Louis-Jean"
+cp0168,60,0,"Lambert, Michel"
+cp0174,84,0,"Laurent, Mathieu"
+cp0190,24,0,"Le Mercier, veuve"
+cp0202,146,0,"Marchenoir, François"
+cp0205,36,0,Méquignon
+cp0208,130,0,"Méquignon, Paul-Denys, junior (pere)"
+cp0219,140,0,"Musier, fils, Jean-Baptiste-Guillaume"
+cp0220,136,0,"Musier, Jean-Francois, pere"
+cp0223,26,0,"Nyon, Nicolas-Henri (Henri)"
+cp0232,144,0,"Pissot, Noël-Jacques, pere"
+cp0242,38,0,Prévost
+cp0249,134,0,"Rapenot, Edme"
+cp0257,124,0,"Royez, Jean-François"
+cp0267,156,0,"Savoie, Nicolas, fils"
+cp0277,122,0,"Tilliard, Nicolas-Noël-Henri"
+cp0278,40,0,"Tilliard, veuve de Nicolas-Martin"
+cp0282,126,0,"Valleyre, Gabriel, pere"
+cp0287,126,0,"Vente, Pierre"
+cp0403,32,0,Le Clerc (all unidentified)
+cp0405,12,0,Nyon (all unidentified)
+cl1541,32,0,"Bastien, , Jean-François"
+cp0137,60,0,"Guillaume, neveu"
+cp0139,30,0,"Guillyn, Pierre"
+cp0284,52,0,"Valleyre, Nicolas-François, fils jeune"
+cl1563,42,0,"Cailleau, André-Charles"
+cl1634,24,0,"Langlois, Philippe-Denis, fils [pere]"
+cp0011,80,0,Barrois
+cp0095,44,0,"Durand de Sugeres, Claude-Jacques-François"
+cp0096,40,0,"Durand du Frenoy, Jean-Augustin, le jeune"
+cp0119,22,0,"Gibert, jeune"
+cp0237,22,0,"Prault, Louis-Laurent, fils, aîné"
+cp0238,24,0,"Prault, Marcel, fils, jeune"
+cl1591,4,0,"Duchesne, veuve de Nicolas Bonaventure"
+cp0151,36,0,"Hochereau, Barthélemy-François"
+cp0184,48,0,Le Comte
+cp0059,6,0,"Debure, Jean, pere"
+cp0128,48,0,"Grangé, Jean-Augustin"
+cp0171,30,0,Langlois
+cp0406,22,0,Saugrain (all unidentified)
+cp0039,50,0,"Cheron, Mademoiselle"
+cp0060,62,0,"Dehansy, Honoré-Clément, jeune"
+cp0069,50,0,"Delormel, Pierre-Nicolas"
+cp0187,8,0,"Le Jay, Louis-Laurent-Edme, fils"
+cp0215,6,0,"Molini, Giovanni Claudio"
+cp0266,56,0,Saurin
+cp0290,16,0,"Voland, Denis"
+cp0072,34,0,"Desaint, Nicolas, jeune"
+cp0111,32,0,"Fournier, Jean-Baptiste, le jeune"
+cp0177,14,0,"Le Breton, André-François"
+cp0006,4,0,"Ballard, Pierre-Robert-Christophe"
+cl2171,4,0,"Poinçot, Claude, pere"
+cp0017,24,0,"Berton, Charles-Pierre"
+cp0118,2,0,"Gibert, Jean-Baptiste, aîné"
+cp0281,16,0,"Vallat-la-Chapelle, veuve"
+cp0145,12,0,"Hérissant, Claude-Jean-Baptiste, fils"
+cp0158,4,0,"Jombert, Claude-Antoine, fils aîné"
+cp0182,4,0,"Le Clerc, pere"
+cp0217,20,0,"Moreau, Nicolas-François"
+cp0268,46,0,"Savoye, veuve d'Etienne-François"
+cp0116,18,0,"Gastelier, André-Médard"
+cp0233,24,0,"Planche, Pierre"
+cp0083,10,0,"Didot, François-Ambroise, l'aîné"
+cp0061,6,0,"Dehansy, Louis-Guillaume, fils ainé"
+cp0105,10,0,Fevre
+cp0126,2,0,Grandin
+cp0221,4,0,"Musier, Mlle"
