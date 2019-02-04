@@ -12,9 +12,14 @@ library(tidyverse)
 library(DBI)
 library(RMySQL)
 library(lubridate)
-library(maps)
 
-manuscripts <- dbConnect(MySQL(), user="root", dbname="manuscripts", host="localhost")
+
+manuscripts <- dbConnect(MySQL(), user="root", dbname="manuscripts", host="127.0.0.1")
+# Ensure correct charset
+manuscripts %>%
+  dbSendQuery("SET NAMES utf8") %>%
+  dbClearResult()
+
 
 fetch_table <- function(con, tbl_name) {
   # Helper function that selects an entire table.

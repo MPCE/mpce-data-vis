@@ -49,7 +49,7 @@ gen_edg_ls <- function(.data, vertex, edge, weight) {
   #   data (tbl): A tibble of data
   #   vertex (expr): The name of the column where the vertices of the graph are found
   #   edge (expr): The name of the column that will define the edges of the graph
-  #   weight_name (expr): The name of the weight variable
+  #   weight_name (expr): The name of the edge weight variable
   #
   # Returns:
   #   edge_list (tbl): A tibble with three columns, 'source', 'target' and 'weight', describing
@@ -64,27 +64,32 @@ gen_edg_ls <- function(.data, vertex, edge, weight) {
   weight <- rlang::enquo(weight)
   
   # Maniuplate the data
-  two_col <- .data %>%
+  three_col <- .data %>%
     select(
       vertex = !!vertex,
-      edge = !!edge
-    )
-  # The data is now a two-column tibble with columns 'vertex' and 'edge'
-  
-  out <- two_col %>%
+      edge = !!edge,
+      weight = !!weight
+    ) %>%
     group_by(edge, vertex) %>%
-    summarise(n = n()) %>%
-    ungroup() %>%
-    inner_join(two_col, by = "edge") %>%
-    select(
+    summarise(
+      weight = sum(weight, na.rm = T)
+    ) %>%
+    ungroup()
+  
+  # The data is now a three-column tibble with columns 'vertex', 'edge' and 'weight'
+  
+  out <- three_col %>%
+    inner_join(three_col, by = "edge") %>%
+    transmute(
       source = vertex.x,
       target = vertex.y,
-      !!weight := n
+      weight = weight.x + weight.y
     ) %>%
     # Sum the edge weights
     ungroup() %>%
     group_by(source, target) %>%
-    summarise(!!weight := sum(!!weight)) %>%
+    summarise(weight = sum(weight)) %>%
+    ungroup() %>%
     # Now remove loops and duplicate edges
     mutate(
       temp_src = as.factor(source) %>% as.numeric(),
@@ -180,7 +185,7 @@ stock_sale %>%
   facet_wrap(~EventCopiesType) + # It doesn't seem to matter which units - nearly all are in 'copies' anyhow
   geom_rug() +
   geom_point() +
-  theme_tufte()
+  ggthemes::theme_tufte()
 
 # Let's see how it is if we assume that prices without hyphens are expressed in livres,
 # and then try to divide the sales by book format.
@@ -199,33 +204,11 @@ stock_sale %>%
 distinct(stock_sale, ID_Sale) %>% nrow()
 
 # Draw an edge between two dealers if they attend at least one sale together
+library(igraph)
 sale_edgelist <- stock_sale %>%
-  group_by(ID_Sale, ID_DealerName) %>%
-  summarise(num_purchases = n()) %>%
-  inner_join(., select(., ID_Sale, ID_DealerName), by = "ID_Sale") %>%
-  rename(
-    source = ID_DealerName.x,
-    target = ID_DealerName.y,
-    num_purchases = num_purchases,
-    sale = ID_Sale
-  ) %>%
-  ungroup() %>%
-  filter(source != target) %>%
-  group_by(source, target) %>%
-  summarise(num_purchases = sum(num_purchases)) %>%
-
-sale_edgelist %>%
-  ggplot(aes(from_id = source, to_id = target, linewidth = sqrt(num_purchases) / 10)) +
-  geom_net() +
-  theme_net()
-
-dealer_graph <- sale_edgelist %>%
-  select(source, target) %>%
-  as.matrix() %>%
-  graph_from_edgelist()
-
-E(dealer_graph)$weight <- sale_edgelist$num_purchases %>%
-  (function(x) 1/x)()
+  gen_edg_ls(ID_DealerName, ID_Sale, EventCopies) %>%
+  mutate(distance = 1 / weight) %>%
+  igraph::graph_from_data_frame(directed = FALSE)
 
 # Basic graph stats:
 edge_density(dealer_graph)
@@ -235,7 +218,7 @@ transitivity(dealer_graph)
 graph_stats <- tibble(
   client_code = igraph::V(dealer_graph) %>% names(),
   degree = igraph::degree(dealer_graph),
-  betweenness = igraph::betweenness(dealer_graph)
+  betweenness = igraph::betweenness(dealer_graph, weights = E(dealer_graph)$distance)
 ) %>%
   left_join(
     select(dealer, Client_Code, Dealer_Name),
@@ -244,48 +227,60 @@ graph_stats <- tibble(
   arrange(desc(betweenness))
 
 # Generate the network by books shared in common
-book_edge <- stock_sale %>%
-  group_by(ID_EditionName, ID_DealerName) %>%
-  summarise(num_purchases = n()) %>%
-  inner_join(., select(., ID_EditionName, ID_DealerName), by = "ID_EditionName") %>%
-  rename(
-    source = ID_DealerName.x,
-    target = ID_DealerName.y,
-    num_purchases = num_purchases,
-    book = ID_EditionName
+edition_net <- stock_sale %>%
+  gen_edg_ls(ID_DealerName, ID_EditionName, EventCopies) %>%
+  mutate(distance = 1 / weight) %>%
+  graph_from_data_frame(directed = FALSE)
+
+edge_density(edition_net)
+transitivity(edition_net)
+
+# Try superbooks too
+super_book_net <- stock_sale %>%
+  gen_edg_ls(ID_DealerName, ID_SuperBookTitle, EventCopies) %>%
+  mutate(distance = 1 / weight) %>%
+  graph_from_data_frame(directed = FALSE)
+
+edge_density(super_book_net)
+transitivity(super_book_net)
+
+##### SECTION 4: ANOTHER APPROACH TO BUILDING THE GRAPHS #####
+
+# We can also try building bipartite graphs, where people are connected to sales/books
+# rather than directly to each other.
+
+vertex_data <- stock_sale %>%
+  distinct(ID_DealerName) %>%
+  transmute(
+    vertex = ID_DealerName,
+    type = "person"
+    ) %>%
+  bind_rows(
+    stock_sale %>% distinct(ID_Sale) %>%
+      transmute(vertex = ID_Sale, type = "sale")
+  )
+  
+
+sale_bipartite <- stock_sale %>%
+  transmute(
+    source = ID_DealerName,
+    target = ID_Sale,
+    copies_sold = EventCopies,
+    total_lot_price = total_lot_price
   ) %>%
-  ungroup() %>%
-  filter(source != target) %>%
   group_by(source, target) %>%
-  summarise(num_purchases = sum(num_purchases))
-
-book_edge %>%
-  ggplot(aes(from_id = source, to_id = target, linewidth = sqrt(num_purchases) / 10)) +
-  geom_net() +
-  theme_net()
-
-book_net <- book_edge %>%
-  select(source, target) %>%
-  as.matrix() %>%
-  graph_from_edgelist()
-
-E(book_net)$weight <- book_edge$num_purchases %>%
-  (function(x) 1/x)()
-
-edge_density(book_net)
-transitivity(book_net)
-
-book_net_stats <- tibble(
-  client_code = igraph::V(book_net) %>% names(),
-  degree = igraph::degree(book_net),
-  betweenness = igraph::betweenness(book_net)
-) %>%
-  left_join(
-    select(dealer, Client_Code, Dealer_Name),
-    by = c("client_code" = "Client_Code")
+  summarise_if(
+    is.numeric,
+    sum,
+    na.rm = T
   ) %>%
-  arrange(desc(betweenness))
+  graph_from_data_frame(
+    directed = F,
+    vertices = vertex_data
+    )
 
-# Write the graph stats to disk
-write_excel_csv(graph_stats, "dealers_joined_by_sales_in_common.csv")
-write_excel_csv(book_net_stats, "dealers_joined_by_books_in_common.csv")
+
+betweenness(sale_bipartite, directed = F) %>%
+  enframe(name = "vertex", value = "betweenness") %>%
+  arrange(desc(betweenness)) %>%
+  print(n = 20)
