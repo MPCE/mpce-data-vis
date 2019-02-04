@@ -49,7 +49,7 @@ gen_edg_ls <- function(.data, vertex, edge, weight) {
   #   data (tbl): A tibble of data
   #   vertex (expr): The name of the column where the vertices of the graph are found
   #   edge (expr): The name of the column that will define the edges of the graph
-  #   weight_name (str): Optional. The name of the weight variable
+  #   weight_name (expr): The name of the weight variable
   #
   # Returns:
   #   edge_list (tbl): A tibble with three columns, 'source', 'target' and 'weight', describing
@@ -61,9 +61,6 @@ gen_edg_ls <- function(.data, vertex, edge, weight) {
   # Enquote the user input.
   vertex <- rlang::enquo(vertex)
   edge <- rlang::enquo(edge)
-  if (rlang::maybe_missing(weight)) {
-    weight <- quote(expr = weight)
-  }
   weight <- rlang::enquo(weight)
   
   # Maniuplate the data
